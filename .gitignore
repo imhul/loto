@@ -1,6 +1,8 @@
 /node_modules
 /.git
 /.cache
+/.vscode
 /dist
 /build
 yarn.lock
+
