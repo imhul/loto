@@ -1,0 +1,159 @@
+/* Media Sizes */
+$media-small: 767px;
+
+/* Colors */
+
+$color-transparent: rgba(0,0,0,0) !default;
+$color-blue: #536dfe !default;
+$color-red: #b71c1c !default;
+$color-dark: #37474f !default;
+$color-green: #00c853 !default;
+
+
+/* Reset styles */
+
+html {
+    -webkit-tap-highlight-color: $color-transparent;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    outline: 0;
+    border: 0;
+    -ms-text-size-adjust: auto;
+    -webkit-text-size-adjust: auto;
+    overflow-x: hidden;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    &,
+    &::before,
+    &::after {
+        box-sizing: border-box;
+    }
+    &:focus,
+    &:active {
+        outline: none;
+    }
+}
+
+@-ms-viewport {
+    width: device-width;
+}
+
+@media screen and (max-width: 400px) {
+    @-ms-viewport {
+        width: 300px;
+    }
+    @-o-viewport {
+        width: device-width;
+    }
+    @viewport {
+        width: device-width;
+    }
+}
+
+/* App */
+
+#root { 
+    height: 100%;
+    .ant-layout {
+        height: 100%;
+        svg {
+            -webkit-tap-highlight-color: $color-transparent !important;
+            -webkit-focus-ring-color: $color-transparent !important;
+            -moz-user-select: none !important;
+            -webkit-user-select: none !important;
+            -ms-user-select: none !important;
+            user-select: none !important;
+            outline: none !important;
+        }
+        .align-left {
+            text-align: left !important;
+        }
+        .align-right {
+            text-align: right !important;
+        }
+        .mb-0 {
+            margin-bottom: 0 !important;
+        }
+        .mb-10 {
+            margin-bottom: 10px !important;
+        }
+        .mb-20 {
+            margin-bottom: 20px !important;
+        }
+        .hidden {
+            display: none !important;
+        }
+        @media only screen and (max-width: $media-small) {
+            .mobile-show {
+                display: block !important;
+            }
+            .mobile-hide {
+                display: none !important;
+            }
+        }
+        // interactive blocks
+        .ant-layout-content {
+            width: 1000px;
+            margin: 0 auto;
+            .interactive {
+                display: flex;
+                .interactive-block-wrapper {
+                    display: inline-block;
+                    width: 20%;
+                    &.invalid {
+                        .interactive-block {
+                            border: 1px solid $color-red;
+                        }
+                    }
+                    .interactive-block {
+                        position: relative;
+                        width: 190px;
+                        height: 238px;
+                        border: 1px solid $color-dark;
+                        .ant-alert {
+                            position: absolute;
+                            bottom: 80px;
+                            width: 188px;
+                        }
+                        .cell {
+                            width: 47px;
+                            height: 47px;
+                            display: inline-block;
+                            padding: 2px;
+                            .cell-content {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                border: 1px solid $color-dark;
+                                height: 100%;
+                                &.checked {
+                                    background-color: $color-blue;
+                                }
+                                &.won {
+                                    background-color: $color-green;
+                                }
+                                &.wrong {
+                                    background-color: $color-dark;
+                                }
+                            }
+                        }
+                    }
+                }
+                .ant-btn {
+                    align-self: flex-end;
+                    width: 200px;
+                    position: absolute;
+                    left: calc(50% - 5px);
+                    transform: translate(-50%, 150%);
+                }
+            }
+        }
+    }
+}
