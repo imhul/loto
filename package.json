@@ -6,7 +6,7 @@
   "email": "blashirk@gmail.com",
   "version": "1.0.0",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development parcel index.html --no-cache"
+    "start": "cross-env NODE_ENV=development parcel index.html --no-cache"
   },
   "dependencies": {
     "@hot-loader/react-dom": "^16.8.4",

@@ -22,13 +22,15 @@ class Interactive extends Component {
 
         return (
             <div className="interactive">
+                { console.info("render winData: ", winData) }
                 {
                     blocks.map(block => {
                         const blockId = block.id;
+                        
                         return (
                             <div 
                                 key={blockId} 
-                                id={blockId} 
+                                // id={blockId} 
                                 className={`interactive-block-wrapper ${block.isValid ? "" : "invalid"}`}>
                                 <div className="interactive-block">
                                     {

@@ -1,24 +1,25 @@
 const rondomNum  = () => Math.floor(Math.random() * 20) + 1;
+
 const testData = [
     {
         id: 1,
-        numbers: [rondomNum, rondomNum, rondomNum, rondomNum, rondomNum]
+        numbers: [rondomNum(), rondomNum(), rondomNum(), rondomNum(), rondomNum()]
     },
     {
         id: 2,
-        numbers: [3, 18]
+        numbers: [rondomNum(), rondomNum(), rondomNum(), rondomNum(), rondomNum()]
     },
     {
         id: 3,
-        numbers: []
+        numbers: [rondomNum(), rondomNum(), rondomNum(), rondomNum(), rondomNum()]
     },
     {
         id: 4,
-        numbers: [8]
+        numbers: [rondomNum(), rondomNum(), rondomNum(), rondomNum(), rondomNum()]
     },
     {
         id: 5,
-        numbers: [15]
+        numbers: [rondomNum(), rondomNum(), rondomNum(), rondomNum(), rondomNum()]
     }
 ];
 
