@@ -7,7 +7,7 @@ $color-transparent: rgba(0,0,0,0) !default;
 $color-blue: #536dfe !default;
 $color-red: #b71c1c !default;
 $color-dark: #37474f !default;
-$color-white: #fff !default;
+$color-light: #e3f2fd !default;
 $color-green: #00c853 !default;
 $color-dark-blue: #001529 !default;
 $color-purple: #7c4dff !default;
@@ -65,6 +65,7 @@ body {
     height: 100%;
     .ant-layout {
         height: 100%;
+        background-color: $color-light;
         svg {
             -webkit-tap-highlight-color: $color-transparent !important;
             -webkit-focus-ring-color: $color-transparent !important;
@@ -101,7 +102,7 @@ body {
             }
         }
         .ant-layout-header {
-            background-color: $color-white;
+            background-color: $color-light;
             padding: 0;
             height: 100px;
             .top-menu {
@@ -119,6 +120,9 @@ body {
                 }
                 .ant-menu {
                     line-height: 64px;
+                    &.ant-menu-light {
+                        background-color: $color-light;
+                    }
                 }
             }
             .main-menu {
@@ -144,8 +148,7 @@ body {
         .ant-layout-content {
             width: 1000px;
             margin: 0 auto;
-            display: flex;
-            flex-direction: column;
+            min-height: 600px;
             & > * {
                 margin: 25px 0;
             }
@@ -158,20 +161,20 @@ body {
                     background: $color-dark;
                     overflow: hidden;
                     h3 {
-                        color: $color-white;
+                        color: $color-light;
                     }
                 }
             }
 
             // interactive block
             .interactive {
-                display: flex;
+                display: inline-block;
                 .interactive-block-wrapper {
                     display: inline-block;
                     width: 20%;
                     &.invalid {
                         .interactive-block {
-                            border: 1px solid $color-red;
+                            border: 2px solid $color-red;
                             background-color: $color-red;
                         }
                     }
@@ -199,7 +202,7 @@ body {
                                 align-items: center;
                                 border-radius: 4px;
                                 border: 1px solid $color-purple;
-                                background-color: $color-white;
+                                background-color: $color-light;
                                 height: 100%;
                                 &.checked {
                                     background-color: $color-blue;
@@ -215,18 +218,20 @@ body {
                     }
                 }
                 .ant-btn {
-                    align-self: flex-end;
+                    display: block;
                     width: 200px;
-                    position: absolute;
-                    left: calc(50% - 5px);
-                    transform: translate(-50%, 150%);
+                    margin: 25px auto;
                 }
             }
         }
         // Footer
         .ant-layout-footer {
             background-color: $color-dark-blue;
-            color: $color-white;
+            color: $color-light;
+            i {
+                font-size: 20px;
+                margin: 5px;
+            }
         }
     }
 }
