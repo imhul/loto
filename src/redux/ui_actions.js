@@ -4,6 +4,14 @@ import testData from "./testData";
 
 const apiUri = ""; 
 
+export function loadCells() {
+  return (dispatch) => {
+    dispatch({
+      type: type.INIT_CELLS,
+    })
+  }
+};
+
 export const fetchWinsBegin = () => ({
   type: type.FETCH_WINS_BEGIN
 });
@@ -59,5 +67,39 @@ export function alertClose(blockId) {
       type: type.ALERT_CLOSE,
       payload: blockId,
     })
+  }
+};
+
+export function getPoints() {
+  return (dispatch) => {
+    dispatch({
+      type: type.GET_TOTAL_POINTS,
+    })
+  }
+};
+
+export function openEndGameModal() {
+  return (dispatch) => {
+    dispatch({
+      type: type.OPEN_END_GAME_MODAL,
+    })
+  }
+};
+
+export function closeEndGameModal() {
+  return (dispatch) => {
+    dispatch({
+      type: type.CLOSE_END_GAME_MODAL,
+    })
+  }
+};
+
+export function startNewGame() {
+  return (dispatch) => {
+    
+    dispatch({
+      type: type.START_NEW_GAME,
+    });
+    dispatch(loadCells())
   }
 };

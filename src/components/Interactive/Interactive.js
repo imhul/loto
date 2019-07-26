@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as UI_ACTIONS from '../../redux/ui_actions';
-import { Alert, Button  } from 'antd';
+import { Alert, Modal, Button  } from 'antd';
 
 class Interactive extends Component {
+
+    componentDidMount() {
+        this.props.uiActions.loadCells()
+    };
 
     onSubmit = () => {
         const { ui, uiActions } = this.props;
@@ -13,16 +17,17 @@ class Interactive extends Component {
 
         });
         uiActions.loadWinData();
-        uiActions.submitSelectedCells(checkedCells)
+        uiActions.submitSelectedCells(checkedCells);
+        setTimeout(() => uiActions.getPoints(), 1500);
+        setTimeout(() => uiActions.openEndGameModal(), 2000);
     };
 
     render() {
-        const { winData, blocks, totalValid } = this.props.ui;
+        const { winData, blocks, totalValid, loading, points, isWinModalOpen, gameOver } = this.props.ui;
         const { uiActions } = this.props;
 
         return (
             <div className="interactive">
-                { console.info("render winData: ", winData) }
                 {
                     blocks.map(block => {
                         const blockId = block.id;
@@ -30,7 +35,6 @@ class Interactive extends Component {
                         return (
                             <div 
                                 key={blockId} 
-                                // id={blockId} 
                                 className={`interactive-block-wrapper ${block.isValid ? "" : "invalid"}`}>
                                 <div className="interactive-block">
                                     {
@@ -67,9 +71,27 @@ class Interactive extends Component {
                     size="large" 
                     onClick={this.onSubmit}
                     type={!totalValid ? "dashed" : "primary"} 
-                    disabled={!totalValid}>
+                    loading={loading}
+                    disabled={!totalValid}
+                    className={gameOver ? "hidden" : "visible"}>
                     Submit
                 </Button>
+                <Button 
+                    size="large" 
+                    onClick={uiActions.startNewGame}
+                    type="primary"
+                    className={gameOver ? "visible" : "hidden"}>
+                    Новая игра
+                </Button>
+                <Modal
+                    title={(points > 0) ? "You Win!" : "You loose. Try again!"}
+                    visible={isWinModalOpen}
+                    onOk={uiActions.closeEndGameModal}
+                    onCancel={uiActions.closeEndGameModal}
+                    >
+                        <h1>Всего очков: {points}</h1>
+                        <p>Хотите начать новую игру?</p>
+                    </Modal>
             </div>
         )
     }
