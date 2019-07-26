@@ -14,7 +14,6 @@ class Interactive extends Component {
         const { ui, uiActions } = this.props;
         const checkedCells = ui.blocks.map(block => {
             return block.cells.filter(item => item.checked === true).length + 1;
-
         });
         uiActions.loadWinData();
         uiActions.submitSelectedCells(checkedCells);
@@ -23,15 +22,13 @@ class Interactive extends Component {
     };
 
     render() {
-        const { winData, blocks, totalValid, loading, points, isWinModalOpen, gameOver } = this.props.ui;
+        const { blocks, totalValid, loading, points, isWinModalOpen, gameOver } = this.props.ui;
         const { uiActions } = this.props;
-
         return (
             <div className="interactive">
                 {
                     blocks.map(block => {
                         const blockId = block.id;
-                        
                         return (
                             <div 
                                 key={blockId} 
@@ -54,7 +51,7 @@ class Interactive extends Component {
                                                     onClick={() => uiActions.toggleCell(cell)}
                                                     className="cell">
                                                     <div className={
-                                                        `cell-content ${cell.checked ? "checked" : ""}`
+                                                        `cell-content ${cell.checked ? "checked" : ""} ${gameOver ? (cell.win ? "won" : "wrong") : ""}`
                                                     }>
                                                         {cell.value}
                                                     </div>
@@ -74,7 +71,7 @@ class Interactive extends Component {
                     loading={loading}
                     disabled={!totalValid}
                     className={gameOver ? "hidden" : "visible"}>
-                    Submit
+                    Отправить
                 </Button>
                 <Button 
                     size="large" 
@@ -84,13 +81,13 @@ class Interactive extends Component {
                     Новая игра
                 </Button>
                 <Modal
-                    title={(points > 0) ? "You Win!" : "You loose. Try again!"}
+                    title={(points > 0) ? "Вы победили!" : "Вы проиграли. Попробуйте снова!"}
                     visible={isWinModalOpen}
                     onOk={uiActions.closeEndGameModal}
                     onCancel={uiActions.closeEndGameModal}
                     >
                         <h1>Всего очков: {points}</h1>
-                        <p>Хотите начать новую игру?</p>
+                        <h2>Хотите начать новую игру?</h2>
                     </Modal>
             </div>
         )

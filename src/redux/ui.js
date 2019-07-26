@@ -143,6 +143,7 @@ const initState = {
     errors: "",
     gameOver: false,
     isWinModalOpen: false,
+    city: "Город",
     blocks: blocks,
 };
 
@@ -205,7 +206,6 @@ export default (state = initState, action) => {
                             winBlock.numbers.map(number => {
                                 if((block.id === winBlock.id) && (cell.value === number)) {
                                     cell.win = true;
-                                    console.info("win cells: ", cell);
                                     return cell
                                 } else return cell
                             })
@@ -217,14 +217,9 @@ export default (state = initState, action) => {
 
         case type.GET_TOTAL_POINTS:
                 const totalWinCells = [...state.blocks].map(block => {
-    
-                        const winCells = block.cells.filter(item => item.win === true);
-                        console.info("winCells 1: ", winCells);
-                        return winCells.length
-                    
-                
+                    const winCells = block.cells.filter(item => item.win === true);
+                    return winCells.length
                 });
-                console.info("totalWinCells: ", totalWinCells);
                 return {
                     ...state,
                     points: totalWinCells.reduce(reducer),
@@ -278,6 +273,12 @@ export default (state = initState, action) => {
         case type.START_NEW_GAME:
             return {
                 ...initState,
+            };
+
+        case type.MENU_ITEM_TOGGLE:
+            return {
+                ...state,
+                city: action.payload
             };
 
         default:

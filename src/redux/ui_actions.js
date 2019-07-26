@@ -44,8 +44,8 @@ export function loadWinData() {
     // dispatch(fetchWinsBegin());
     // return axios.get(apiUri)
     //   .then(({data}) => {
-    //     console.log(data);
-    //     console.log('success');
+    //     console.warn(data);
+    //     console.warn('success');
     //     dispatch(fetchWinsSuccess(data));
     //   })
     //   .catch(error => dispatch(fetchWinsFailure(error)));
@@ -101,5 +101,14 @@ export function startNewGame() {
       type: type.START_NEW_GAME,
     });
     dispatch(loadCells())
+  }
+};
+
+export function clickMenu(menuItemKey) {
+  return (dispatch) => {
+    dispatch({
+      type: type.MENU_ITEM_TOGGLE,
+      payload: menuItemKey,
+    })
   }
 };

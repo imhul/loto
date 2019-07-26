@@ -1,5 +1,8 @@
 import React from 'react';
+import { Layout } from 'antd';
 
-const MainFooter = () => <div>Footer</div>;
+const { Footer } = Layout;
+
+const MainFooter = () => <Footer>Footer</Footer>;
 
 export default MainFooter;
