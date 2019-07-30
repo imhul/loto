@@ -148,18 +148,6 @@ const initState = {
 };
 
 export default (state = initState, action) => {
-
-    const current = { ...action.payload };
-    const blockId = `${current.id}`.slice(0,1);
-    const isTotalValidArr = [...state.blocks].map(block => {
-        const checked = block.cells.filter(item => item.checked === true).length + 1;
-        if((`${block.id}` === blockId) && (checked > 5)) {
-            return 1
-        } else return 0
-    });
-    const reducer = (accumulator, currentValue) => accumulator + currentValue;
-    const isTotalValid = isTotalValidArr.length ? isTotalValidArr.reduce(reducer) : [];
-    
     switch (action.type) {
 
         case type.INIT_CELLS: 
@@ -226,16 +214,17 @@ export default (state = initState, action) => {
                 };
 
         case type.CELL_TOGGLE:
+            const blockId = `${action.payload.id}`.slice(0,1);
+            console.info('isTotalValid: ', [...state.blocks].filter(item => item.isValid === true).length);
             return {
-                ...state,
-                totalValid: isTotalValid === 0, 
+                ...state, 
                 blocks: [...state.blocks].map(block => {
                     const checkedCells = block.cells.filter(item => item.checked === true).length + 1;
                     if(`${block.id}` === blockId) {
                         block.isValid = checkedCells <= 5;
                     };
                     [...block.cells].map(cell => {
-                        if (cell.id === current.id && ((block.isValid) || (!block.isValid && cell.checked))) {
+                        if (cell.id === action.payload.id && ((block.isValid) || (!block.isValid && cell.checked))) {
                             cell.checked = !cell.checked;
                             return cell
                         } else return cell
@@ -244,10 +233,16 @@ export default (state = initState, action) => {
                 })
             };
 
-        case type.ALERT_CLOSE:
+        case type.VALIDATE_CELLS:
             return {
                 ...state,
-                totalValid: isTotalValid === 0, 
+                totalValid: [...state.blocks].filter(item => item.isValid === true).length === 5,
+            };
+
+        case type.ALERT_CLOSE:
+            console.info('ALERT_CLOSE isTotalValid: ', [...state.blocks].filter(item => item.isValid === true).length);
+            return {
+                ...state,
                 blocks: [...state.blocks].map(block => {
                     if(block.id === action.payload) {
                         block.isValid = true;

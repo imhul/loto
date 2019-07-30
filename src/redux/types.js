@@ -12,4 +12,5 @@ export const typesUI = {
     CLOSE_END_GAME_MODAL:   'CLOSE_END_GAME_MODAL',
     START_NEW_GAME:         'START_NEW_GAME',
     MENU_ITEM_TOGGLE:       'MENU_ITEM_TOGGLE',
+    VALIDATE_CELLS:         'VALIDATE_CELLS',
 };

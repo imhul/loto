@@ -12,6 +12,14 @@ export function loadCells() {
   }
 };
 
+export function validateCells() {
+  return (dispatch) => {
+    dispatch({
+      type: type.VALIDATE_CELLS,
+    })
+  }
+};
+
 export const fetchWinsBegin = () => ({
   type: type.FETCH_WINS_BEGIN
 });
@@ -57,7 +65,8 @@ export function toggleCell(cell) {
     dispatch({
       type: type.CELL_TOGGLE,
       payload: cell,
-    })
+    });
+    dispatch(validateCells())
   }
 };
 
@@ -66,7 +75,8 @@ export function alertClose(blockId) {
     dispatch({
       type: type.ALERT_CLOSE,
       payload: blockId,
-    })
+    });
+    dispatch(validateCells())
   }
 };
 
